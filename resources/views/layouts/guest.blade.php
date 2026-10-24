@@ -14,17 +14,19 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+    <body class="pump-auth font-sans antialiased">
+        <div class="pump-auth__page">
+            <main class="pump-auth__shell">
+                <a class="pump-auth__brand" href="/" aria-label="The Pump Bar home">
+                    <img src="{{ asset('images/the-pump-bar-logo.svg') }}" alt="The Pump Bar">
                 </a>
-            </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                <section class="pump-auth__card">
                 {{ $slot }}
-            </div>
+                </section>
+
+                <p class="pump-auth__footer">THE PUMP BAR <span></span> TEAM ACCESS</p>
+            </main>
         </div>
     </body>
 </html>

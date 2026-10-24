@@ -28,9 +28,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $destination = Auth::user()->isStaff() ? 'pos.index' : 'dashboard';
+        if (Auth::user()->isStaff()) {
+            $request->session()->forget('url.intended');
 
-        return redirect()->intended(route($destination, absolute: false));
+            return redirect()->to(route('pos.index', absolute: false));
+        }
+
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**
