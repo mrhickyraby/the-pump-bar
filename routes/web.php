@@ -39,13 +39,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index')->middleware('role:owner,manager');
 
-    Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses.index')->middleware('role:owner,manager');
-    Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store')->middleware('role:owner,manager');
+    Route::get('/expenses', [ExpenseController::class, 'index'])->name('expenses.index')->middleware('role:owner');
+    Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store')->middleware('role:owner');
 
     Route::get('/pos', [SaleController::class, 'index'])->name('pos.index')->middleware('role:owner,manager,staff');
     Route::post('/pos', [SaleController::class, 'store'])->name('pos.store')->middleware('role:owner,manager,staff');
 
-    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index')->middleware('role:owner,manager');
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index')->middleware('role:owner');
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('role:owner');
     Route::post('/users', [UserController::class, 'store'])->name('users.store')->middleware('role:owner');

@@ -1,6 +1,6 @@
 <header class="pump-header" x-data="{ menuOpen: false }">
     <div class="pump-header__top">
-        <a class="pump-brand {{ file_exists(public_path('images/the-pump-bar-logo.svg')) ? 'pump-brand--with-logo' : '' }}" href="{{ route('dashboard') }}" aria-label="The Pump Bar dashboard">
+        <a class="pump-brand {{ file_exists(public_path('images/the-pump-bar-logo.svg')) ? 'pump-brand--with-logo' : '' }}" href="{{ Auth::user()->isStaff() ? route('pos.index') : route('dashboard') }}" aria-label="The Pump Bar dashboard">
             @if(file_exists(public_path('images/the-pump-bar-logo.svg')))
                 <img class="pump-brand__logo" src="{{ asset('images/the-pump-bar-logo.svg') }}" alt="The Pump Bar logo">
             @else
@@ -30,7 +30,7 @@
                     <a class="pump-nav__link {{ request()->routeIs('inventory.*') ? 'is-active' : '' }}" href="{{ route('inventory.index') }}" @if(request()->routeIs('inventory.*')) aria-current="page" @endif>Inventory</a>
                 @endif
                 <a class="pump-nav__link {{ request()->routeIs('pos.*') ? 'is-active' : '' }}" href="{{ route('pos.index') }}" @if(request()->routeIs('pos.*')) aria-current="page" @endif>POS</a>
-                @if(Auth::user()->isOwner() || Auth::user()->isManager())
+                @if(Auth::user()->isOwner())
                     <a class="pump-nav__link {{ request()->routeIs('expenses.*') ? 'is-active' : '' }}" href="{{ route('expenses.index') }}" @if(request()->routeIs('expenses.*')) aria-current="page" @endif>Expenses</a>
                     <a class="pump-nav__link {{ request()->routeIs('reports.*') ? 'is-active' : '' }}" href="{{ route('reports.index') }}" @if(request()->routeIs('reports.*')) aria-current="page" @endif>Reports</a>
                 @endif

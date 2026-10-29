@@ -260,6 +260,33 @@
 .pump-action span:last-child { color: var(--pump-red); font-size: 17px; }
 .pump-footer { padding: 23px 0 18px; color: #a39a9d; font-size: 10px; text-align: center; }
 .pump-footer span { padding-inline: 5px; color: var(--pump-yellow); }
+.pump-analytics { margin-bottom: 18px; }
+.pump-analytics__filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; padding: 16px; border: 1px solid var(--pump-line); border-radius: 4px; background: #fff; }
+.pump-analytics__filter { display: grid; min-width: 180px; gap: 5px; }
+.pump-analytics__filter label { color: #555052; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.pump-analytics__filters input,
+.pump-analytics__filters select { min-height: 39px; padding: 7px 10px; border: 1px solid #d8d0d1; border-radius: 3px; background: #fff; color: var(--pump-ink); font-size: 13px; }
+.pump-analytics__filters button { min-height: 39px; padding: 0 16px; border: 0; border-radius: 3px; background: var(--pump-red); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+.pump-analytics__filters button:hover { background: var(--pump-red-dark); }
+.pump-analytics__caption { margin: 10px 0 0; color: var(--pump-muted); font-size: 12px; }
+.pump-metrics--owner { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 13px; }
+
+.pump-financial-table { width: 100%; min-width: 940px; border-collapse: collapse; font-size: 12px; }
+.pump-financial-table th,
+.pump-financial-table td { padding: 8px 10px; border: 1px solid #d5cfcf; text-align: center; }
+.pump-financial-table thead th { background: #f5f1f1; color: #222; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.pump-financial-table__cups { background: var(--pump-red) !important; color: #fff !important; }
+.pump-financial-table tbody td:nth-child(5),
+.pump-financial-table tbody td:nth-child(7) { background: #ffd24d; font-weight: 700; }
+.pump-financial-table tbody td:nth-child(8) { background: #3ca24f; color: #fff; font-weight: 700; }
+.pump-financial-table__total td { background: #f7f5f5; font-weight: 700; }
+.pump-financial-table__total td:nth-child(5) { background: #f5be00; }
+.pump-financial-table__total td:nth-child(8) { background: #2f9744; }
+
+.pump-commission-table { width: 100%; min-width: 390px; border-collapse: collapse; font-size: 12px; }
+.pump-commission-table th,
+.pump-commission-table td { padding: 6px 8px; border: 1px solid #d5cfcf; text-align: center; }
+.pump-commission-table thead th { background: #f5be00; color: #272426; font-size: 11px; font-weight: 700; text-transform: uppercase; }
 
 .pump-app > main:not(.pump-main) {
 	width: min(1160px, calc(100% - 48px));
@@ -349,6 +376,7 @@
 
 @media (max-width: 900px) {
 	.pump-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.pump-metrics--owner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 1100px) {
@@ -374,6 +402,9 @@
 
 @media (max-width: 640px) {
 	.pump-main { width: min(100% - 30px, 520px); }
+	.pump-analytics__filters { padding: 12px; }
+	.pump-analytics__filter { min-width: 100%; }
+	.pump-analytics__filters button { width: 100%; }
 	.pump-header__top { position: relative; width: 100%; min-height: 68px; padding: 6px 14px; }
 	.pump-brand__logo { height: 48px; max-width: 118px; }
 	.pump-menu-toggle { display: flex; width: 42px; height: 42px; flex: 0 0 42px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border: 1px solid rgb(255 255 255 / 45%); border-radius: 4px; background: transparent; cursor: pointer; }
@@ -391,6 +422,7 @@
 	.pump-intro h1 { font-size: 34px; }
 	.pump-primary-action { justify-content: space-between; width: 100%; }
 	.pump-metrics { gap: 9px; }
+	.pump-metrics--owner { grid-template-columns: 1fr; }
 	.pump-metric { padding: 13px 12px; }
 	.pump-metric__value { font-size: 27px; }
 	.pump-metric__label { font-size: 10px; }

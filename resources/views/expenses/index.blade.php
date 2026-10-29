@@ -28,22 +28,21 @@
                 @endforelse
             </div>
         </div>
-        @if(Auth::user()->isOwner() || Auth::user()->isManager())
         <div class="bg-white rounded-xl shadow p-6">
             <h2 class="text-xl font-bold mb-4">Add expense</h2>
             <form method="POST" action="{{ route('expenses.store') }}" class="space-y-4">
                 @csrf
                 <div>
                     <label class="block text-sm font-medium text-slate-700">Branch</label>
-                    @if(Auth::user()->isOwner())
-                        <select name="branch_id" class="mt-1 w-full border-slate-300 rounded-md" required>
-                            @foreach($branches as $branch)
-                                <option value="{{ $branch->id }}">{{ $branch->name }}</option>
-                            @endforeach
-                        </select>
-                    @else
-                        <input type="text" value="{{ $branches->first()?->name }}" class="mt-1 w-full border-slate-300 rounded-md" disabled>
-                    @endif
+                    <select name="branch_id" class="mt-1 w-full border-slate-300 rounded-md" required>
+                        @foreach($branches as $branch)
+                            <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700">Expense date</label>
+                    <input type="date" name="occurred_at" value="{{ now()->toDateString() }}" class="mt-1 w-full border-slate-300 rounded-md" required>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700">Category</label>
@@ -60,7 +59,6 @@
                 <button type="submit" class="w-full bg-red-500 text-white rounded-md px-4 py-2 font-semibold">Save expense</button>
             </form>
         </div>
-        @endif
     </main>
 </body>
 </html>

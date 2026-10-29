@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Branch;
-use App\Models\Expense;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -100,30 +99,23 @@ class BusinessAccessTest extends TestCase
             ->assertDontSee('Other Branch');
     }
 
-    public function test_manager_expenses_are_forced_to_their_assigned_branch(): void
+    public function test_manager_cannot_access_owner_financial_modules(): void
     {
         $assignedBranch = Branch::factory()->create();
-        $otherBranch = Branch::factory()->create();
         $manager = User::factory()->create([
             'role' => 'manager',
             'branch_id' => $assignedBranch->id,
         ]);
 
+        $this->actingAs($manager)->get('/expenses')->assertForbidden();
+        $this->actingAs($manager)->get('/reports')->assertForbidden();
         $this->actingAs($manager)->post('/expenses', [
-            'branch_id' => $otherBranch->id,
+            'branch_id' => $assignedBranch->id,
             'category' => 'Supplies',
             'amount' => 50,
-            'description' => 'Branch expense',
-        ])->assertRedirect('/expenses');
-
-        $this->assertDatabaseHas('expenses', [
-            'branch_id' => $assignedBranch->id,
-            'user_id' => $manager->id,
-            'category' => 'Supplies',
-        ]);
+            'occurred_at' => now()->toDateString(),
+        ])->assertForbidden();
         $this->assertDatabaseMissing('expenses', [
-            'branch_id' => $otherBranch->id,
-            'user_id' => $manager->id,
             'category' => 'Supplies',
         ]);
     }
